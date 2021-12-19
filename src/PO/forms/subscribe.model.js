@@ -2,6 +2,7 @@ const { Select } = require('./select');
 const { Field } = require('./field');
 const { Checkbox } = require('./checkbox');
 const { Textarea } = require('./textarea');
+const { addAttachment } = require('@wdio/allure-reporter').default;
 
 class Subscribe {
     modelSubscribe() {
@@ -19,6 +20,7 @@ class Subscribe {
             el.set(formData[elModel.name]);
             await browser.pause(200);
         }
+        addAttachment('user data', JSON.stringify(formData), 'application/text');
         await $('button=Create').click();
         await browser.pause(500);
     }
