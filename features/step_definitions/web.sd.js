@@ -7,9 +7,9 @@ const { CustomPage2 } = require("../../src/PO/custom_page_2.po");
 const { Table } = require("../../src/PO/tables/table.po");
 const Subscribe = require('../../src/PO/forms/subscribe.model');
 
-When(/^I go to "([^"]*)"$/, async function (url) {
-    await browser.url(url);
-});
+// When(/^I go to "([^"]*)"$/, async function (url) {
+//     await browser.url(url);
+// });
 
 When(/^I check the texts of the elements:$/, async function (table) {
     const rows = table.hashes()
@@ -28,14 +28,14 @@ When(/^I expect element: "([^"]*)" (text|value): "([^"]*)"$/, async function (se
         .toEqual(text)
 });
 
-When('I go to {string} menu item', function (item) {
-    // add implementation here
-});
+// When('I go to {string} menu item', function (item) {
+//     // add implementation here
+// });
 
 
-When('I login as: {string}, {string}', async function (login, password) {
-    await Login.login({ username: login, password: password });
-});
+// When('I login as: {string}, {string}', async function (login, password) {
+//     await Login.login({ username: login, password: password });
+// });
 
 async function invokeMethodOnPo(action, pretext, po, element, parameters) {
     if ('string' === (typeof parameters)) {
@@ -71,13 +71,13 @@ When(/^I sort table by "([^"]*)"$/, async function (name) {
 });
 
 
-When(/^I fill form:$/, async function (formYaml) {
-    const formData = YAML.parse(formYaml);
-    console.log({ formData });
-    console.log(Subscribe.model)
-    for (const elModel of Subscribe.model) {
-        const el = new elModel.type(elModel.selector);
-        await el.set(formData[elModel.name]);
-        await browser.pause(200);
-    }
-});
+// When(/^I fill form:$/, async function (formYaml) {
+//     const formData = YAML.parse(formYaml);
+//     console.log({ formData });
+//     console.log(Subscribe.model)
+//     for (const elModel of Subscribe.model) {
+//         const el = new elModel.type(elModel.selector);
+//         await el.set(formData[elModel.name]);
+//         await browser.pause(200);
+//     }
+// });

@@ -3,8 +3,10 @@ class Checkbox {
         this.selector = selector;
     }
 
-    set(value) {
-        // add your implementation
+    async set(value) {
+       if(value==='yes'){
+           await $(this.selector).click();
+       }
     }
 }
 

@@ -1,7 +1,7 @@
 class Table {
     constructor() {
-        this.table = $('.table-responsive');
-        this.headersSelector = '.tabulator-col-title';
+        this.table = $('.tabulator');
+        this.headersSelector = '.tabulator-col';
         this.cellSelector = '.tabulator-cell';
         this.rowSelector = '.tabulator-row';
     }
@@ -23,14 +23,19 @@ class Table {
                 const cells = await row.$$(this.cellSelector);
                 let index = 0;
                 for (const cell of cells) {
-                    console.log(await cell.getText());
-                    result[(await this.headers())[index].name] = await cell;
+                    result[(await this.headers())[index].name] = await cell.getText();
                     index += 1;
                 }
+                if (result['Email'] === 'default@test.com') {return;}
+                delete result.Demo;
+                delete result.State;
+                if (result['Role'] === 'user') {delete result[0]};
                 return result;
             }
         )
-        return await Promise.all(result);
+        return (await Promise.all(result)).filter(function(x) {
+            return x !== undefined;
+       });
     }
 }
 
