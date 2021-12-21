@@ -123,7 +123,7 @@ exports.config = {
         ['allure', {
             outputDir: 'allure-results',
             disableWebdriverStepsReporting: true,
-            // disableWebdriverScreenshotsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
             useCucumberStepReporter: false,
         }]],
 
@@ -258,29 +258,18 @@ exports.config = {
         addDescription('TESTTESTTEST!!! <script>alert(123)</script>')
 
         if (!result.passed) {
-            addDescription('TESTTESTTEST!!!<img src="https://s.keepmeme.com/files/en_posts/20200908/blurred-surprised-cat-meme-5b734a45210ef3b6657bcbe2831715fa.jpg">')
+            addDescription('TESTTESTTEST!!!<img src="https://s.keepmeme.com/files/en_posts/20200908/blurred-surprised-cat-meme-5b734a45210ef3b6657bcbe2831715fa.jpg">');
             
-            addAttachment('screenshot', 
-            async function(){
-                const name = 'ERROR-chrome-' + Date.now();
-                return await browser.takeScreenshot('./errorShots/' + name + '.png')
-            },
-            'image/png');
+            const shot = await browser.takeScreenshot();
+            //addAttachment('screenshot', shot, 'image/png');
 
-            addAttachment('html', 
-            async function(){
-                 return await browser.getSource();
-            },
-            'text/html');
+            const source = await browser.getSource()
+            addAttachment('html', source, 'text/html');
             
-            addAttachment('cookies', 
-            async function(){
-                const cookies = await browser.getAllCookies();
-                return JSON.stringify(cookies) ;
-            },
-            'text/plain');
+            const cookies = JSON.stringify(await browser.getAllCookies());         
+            addAttachment('cookies', cookies, 'text/plain');
         }
-        // await browser.reloadSession();
+        await browser.reloadSession();
     },
 
     /**

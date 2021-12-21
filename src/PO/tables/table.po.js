@@ -1,15 +1,17 @@
 class Table {
     constructor() {
         this.table = $('.tabulator');
-        this.headersSelector = '.tabulator-col';
+        this.headersSelector = '.tabulator-col-title';
         this.cellSelector = '.tabulator-cell';
         this.rowSelector = '.tabulator-row';
     }
 
     async headers() {
-        return this.table.$$(this.headersSelector).map(async (header) => {
-            return { element: await header, name: await header.getText() };
+    	const elements = await this.table.$$(this.headersSelector);
+        const result = elements.map(async (header) => {
+            return header.getHTML(false) ;
         })
+        return Promise.all(result);
     }
 
     rows() {
@@ -18,18 +20,17 @@ class Table {
 
     async data() {
         const rows = await this.rows();
+        const headers = await this.headers();
         const result = rows.map(async (row) => {
                 let result = {};
                 const cells = await row.$$(this.cellSelector);
                 let index = 0;
                 for (const cell of cells) {
-                    result[(await this.headers())[index].name] = await cell.getText();
+                    result[headers[index]] = await cell.getText();
                     index += 1;
                 }
                 if (result['Email'] === 'default@test.com') {return;}
-                delete result.Demo;
-                delete result.State;
-                if (result['Role'] === 'user') {delete result[0]};
+                ['Demo', 'Wait for supervisor', 'Manager type', 'State'].forEach(key => delete result[key])                
                 return result;
             }
         )

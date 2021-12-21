@@ -24,7 +24,7 @@ When(/^I fill user form:$/, async function (formYaml) {
     await User.setValues(formData);
 });
 
-When(/^I fill form:$/, async function (formYaml) {
+When(/^I fill subscribe form:$/, async function (formYaml) {
     const formData = YAML.parse(formYaml);
     await Subscribe.setValues(formData);
 });
@@ -40,5 +40,6 @@ Then(/^I check table:$/, async function (table) {
 Then('I log out', async function(){
     await Navigator.logout();
 })
+
 
 

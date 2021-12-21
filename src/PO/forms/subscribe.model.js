@@ -20,7 +20,7 @@ class Subscribe {
             el.set(formData[elModel.name]);
             await browser.pause(200);
         }
-        addAttachment('user data', JSON.stringify(formData), 'application/text');
+        addAttachment('user data', formData, 'application/json');
         await $('button=Create').click();
         await browser.pause(500);
     }

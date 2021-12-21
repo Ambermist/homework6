@@ -42,7 +42,7 @@ Feature: userSubscriptions
             Annual: 100
             """        
         When I go to "Create Subscription" menu item
-        When I fill form:
+        When I fill subscribe form:
             """
             plan: 'Education'
             years: '1'
@@ -51,7 +51,7 @@ Feature: userSubscriptions
             description: 'subscr1'
             """
         When I go to "Create Subscription" menu item
-        When I fill form:
+        When I fill subscribe form:
             """
             plan: 'Premium'
             years: '1'
@@ -60,7 +60,7 @@ Feature: userSubscriptions
             description: 'subscr2'
             """
         When I go to "Create Subscription" menu item
-        When I fill form:
+        When I fill subscribe form:
             """
             plan: 'Enterprise'
             years: '2'
@@ -74,11 +74,12 @@ Feature: userSubscriptions
             | PREM | test2@test.com | 1     | 100   | on      | subscr2     |
             | ENT  | test3@test.com | 2     | 200   | on      | subscr3     |
         When I go to "List of users" menu item
+
         Then I check table:
-           || Email          | Role | Address 1       | Address 2 | City    | Zip    | Description |
-        | | test1@test.com | user | Rustaveli 20-21 | flor 4    | Tbilisi | 222567 | test user1  |
-        | | test2@test.com | user | Rustaveli 20-21 | flor 4    | Tbilisi | 222567 | test user2  |
-        | | test3@test.com | user | Rustaveli 20-21 | flor 4    | Tbilisi | 222567 | test user3  |
+        | Email          | Role | Address 1       | Address 2 | Anual | City    | Zip    | Description |
+        | test1@test.com | user | Rustaveli 20-21 | flor 4    | 100   | Tbilisi | 222567 | test user1  |
+        | test2@test.com | user | Rustaveli 20-21 | flor 4    | 100   | Tbilisi | 222567 | test user2  |
+        | test3@test.com | user | Rustaveli 20-21 | flor 4    | 100   | Tbilisi | 222567 | test user3  |
         Then I log out
 
 
